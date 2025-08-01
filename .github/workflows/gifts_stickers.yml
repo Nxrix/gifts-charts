@@ -1,0 +1,46 @@
+name: gifts_stickers
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        repository: nxrix/workflows
+        token: ${{ secrets.PAT0 }}
+        path: workflows
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Cache npm
+      uses: actions/cache@v4.2.3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run js 1
+      run: node workflows/gifts_stickers.js
+
+    - name: Run js 2
+      run: node workflows/gifts_stickers2.js
