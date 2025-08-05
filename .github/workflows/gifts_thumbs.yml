@@ -1,10 +1,10 @@
-name: gifts_thumbs
+name: Update Thumbs
 
 on:
   workflow_dispatch:
 
 jobs:
-  gifts-thumbs:
+  update_thumbs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -29,8 +29,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run gifts_thumbs.js
-        run: node gifts_thumbs.js
+      - name: Run update_thumbs.js
+        run: node update_thumbs.js
 
       - name: Commit image changes
         run: |
