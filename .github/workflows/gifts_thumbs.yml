@@ -13,13 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Checkout workflows
-        uses: actions/checkout@v4
-        with:
-          repository: nxrix/workflows
-          token: ${{ secrets.PAT0 }}
-          path: workflows
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -37,13 +30,13 @@ jobs:
         run: npm install
 
       - name: Run gifts_thumbs.js
-        run: node workflows/gifts_thumbs.js
+        run: node gifts_thumbs.js
 
       - name: Commit image changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add gifts/
+          git add gifts/thumbs
           git commit -m "^ thumbs"
           git pull --rebase
           git push
